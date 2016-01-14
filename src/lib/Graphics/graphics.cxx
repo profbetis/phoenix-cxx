@@ -46,13 +46,18 @@ void Graphics::drawLine(int x1, int y1,
 }
 
 void Graphics::drawSquare(int x1, int y1,
-                        int x2, int y2)
-{
-  int sizex = x2 - x1, sizey = y2 - y1;
-
+                        int x2, int y2){
   for( int i = x1; i<=x2; i++){
     drawLine( i, y1, i, y2);
   }
+}
+
+void Graphics::drawSquareOutline(int x1, int y1,
+                                 int x2, int y2){
+  drawLine( x1, y1, x2, y1 );
+  drawLine( x2, y1, x2, y2 );
+  drawLine( x2, y2, x1, y2 );
+  drawLine( x1, y2, x1, y1 );
 }
 
 Graphics::~Graphics()

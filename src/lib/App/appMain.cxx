@@ -9,19 +9,21 @@ void App::run()
      bool finished = false;
 
      bool lmbDown = false, lmbDownPrev = false;
-     bool lmbClick = false, lmbRelease = false;
+    //  bool lmbClick = false, lmbRelease = false;
      bool rmbDown = false, rmbDownPrev = false;
-     bool rmbClick = false, rmbRelease = false;
+    //  bool rmbClick = false, rmbRelease = false;
 
      int prevX = 0, prevY = 0;
      int currX = 0, currY = 0; // Mmmmmm... Curry!
-    //  float currsX = 0, currsY = 0;
+    //  float currsX = 0, currsY = 0; // Smoothed mouse positions
     //  float prevsX = 0, prevsY = 0;
 
      SDL_Event event = SDL_Event{ 0 };
 
      while (!finished) {
           graphics.update();
+
+          prevX = currX, prevY = currY;
 
           while (SDL_PollEvent(&event)) {
                switch(event.type) {
@@ -42,14 +44,14 @@ void App::run()
                     break;
                case SDL_MOUSEBUTTONDOWN:
                     prevX = currX = event.button.x, prevY = currY = event.button.y;
-                    
+
                     if (event.button.button == SDL_BUTTON_LEFT) {
                          lmbDown = true;
                          graphics.drawPoint(currX, currY);
                     }
                     if (event.button.button == SDL_BUTTON_RIGHT){
                         rmbDown = true;
-                        graphics.drawSquare(currX, currY, currX + 100, currY + 100);
+                        graphics.drawSquareOutline(currX, currY, currX + 100, currY + 100);
                     }
                     break;
                case SDL_MOUSEMOTION:
@@ -62,7 +64,6 @@ void App::run()
                         //  graphics.drawLine(int(prevsX), int(prevsY), int(currsX), int(currsY));
                     }
 
-                    prevX = currX, prevY = currY;
                     break;
                }
           }
