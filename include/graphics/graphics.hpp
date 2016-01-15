@@ -20,7 +20,9 @@ namespace gfx
           void update();
           void draw();
 
-          inline void drawPoint(int x, int y) { pixels[y * w + x] = 0; }
+          void setBrushColor( int );
+
+          inline void drawPoint(int x, int y) { pixels[y * w + x] = brushColor; }
 
           void drawLine(int x1, int y1,
                         int x2, int y2);
@@ -36,6 +38,8 @@ namespace gfx
      private:
           int w;
           int h;
+
+          int brushColor;
 
           Uint32* pixels;
 
